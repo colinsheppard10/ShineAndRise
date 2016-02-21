@@ -118,7 +118,7 @@ int main(){
     int numberfd = listener;
     for(;;){
         tempSet = master;
-        select(numberfd+1, &tempSet, nullptr, nullptr, nullptr);
+        select(numberfd+1, &tempSet, NULL, NULL, NULL);
         
         int i;
         for(i=0;i<= numberfd;i++){
