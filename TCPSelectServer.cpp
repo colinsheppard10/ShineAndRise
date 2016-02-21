@@ -86,8 +86,14 @@ int acceptClient(int mainSocket){
     
     return newfd;
 };
-void android(){
+void android(char* input){
     cout << "found android" << endl;
+    cout << input << endl;
+    
+  //  char testBuffer[] = "show tables";
+  //  access_database(testBuffer);
+    
+    
 }
 void esp(){
     cout << "found esp" << endl;
@@ -122,12 +128,13 @@ int main(){
                     int newfd;
                     newfd = acceptClient(listener);
                     cout << "new client on fd: "<< newfd << endl;
-                   
+                    
                     recv(newfd, &inputBuffer, 30, 0);
                     
                     if(inputBuffer[0] == '1'){
-                        android();
-                    }else if (inputBuffer[0] == '0'){
+                        android(inputBuffer);
+                    }
+                    if (inputBuffer[0] == '0'){
                         esp();
                     }
                     
