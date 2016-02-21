@@ -90,8 +90,8 @@ void android(char* input){
     cout << "found android" << endl;
     cout << input << endl;
     
-  //  char testBuffer[] = "show tables";
-  //  access_database(testBuffer);
+    char testBuffer[] = "show tables";
+    access_database(testBuffer);
     
     
 }
