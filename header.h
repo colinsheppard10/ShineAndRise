@@ -1,1 +1,1 @@
-void printFunc(void);
+void access_database(char*);
