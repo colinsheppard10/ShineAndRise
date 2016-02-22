@@ -96,6 +96,7 @@ void android(char* input){
     char *secondHalf = "');";
     
     strcat(buffer, input);
+    buffer[strlen(buffer)] = 0;
     strcat(buffer, secondHalf);
     
     cout << "from finished: "<< buffer << endl;
