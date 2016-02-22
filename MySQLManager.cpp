@@ -31,7 +31,7 @@ void access_database(char* query){
 	mysql_query(mysql1, query);
 	res = mysql_use_result(mysql1);
 
-	printf("these are the tables in the database\n");
+	printf("this is the data in you database\n");
 	while((row = mysql_fetch_row(res)) != NULL){
 		printf("%s \n", row[0]);
 	}

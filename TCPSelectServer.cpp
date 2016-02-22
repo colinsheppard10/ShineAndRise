@@ -91,9 +91,15 @@ void android(char* input){
     cout << "found android" << endl;
     cout << input << endl;
     
-    char testBuffer[] = "show tables";
-    access_database(testBuffer);
+    char buffer[60] ={0};
+    strcpy(buffer, "INSERT INTO subjects (menu_name) VALUE('");
+    char *secondHalf = "');";
     
+    strcat(buffer, input);
+    strcat(buffer, secondHalf);
+    
+    cout << "from finished: "<< buffer << endl;
+    access_database(buffer);
     
 }
 void esp(){
@@ -101,6 +107,7 @@ void esp(){
 }
 
 int main(){
+    
     fd_set tempSet;
     fd_set master;
     int listener;
@@ -108,7 +115,7 @@ int main(){
     char inputBuffer[99];
     
     getTime(timeBuffer);
-    cout << "this is the time: " << timeBuffer << endl;
+    cout << timeBuffer << endl;
     
     listener = setUpServer();
     
@@ -169,3 +176,4 @@ int main(){
         }
     }
 }
+

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isOnline()) {
-                    requestData("10.0.0.6", finishedEditing());
+                    requestData("10.0.0.4", finishedEditing());
                 } else {
                     error.append("network connection failed");
                 }
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
        else if (Sunday.isChecked())
            return "Sunday";
        else
-           return "No Day Selected";
+           return "No";
     }
 
     private void insertAlarm(String newAlarm) {
