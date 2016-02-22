@@ -1,1 +1,0 @@
-void printFunc(void);
