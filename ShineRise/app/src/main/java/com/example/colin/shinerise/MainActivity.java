@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isOnline()) {
-                    requestData("10.0.0.4", finishedEditing());
+                    requestData("10.0.0.6", finishedEditing());
                 } else {
                     error.append("network connection failed");
                 }
