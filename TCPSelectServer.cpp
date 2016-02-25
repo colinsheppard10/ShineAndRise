@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <header.h>
+//#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -96,11 +96,11 @@ void android(char* input){
     char *secondHalf = "');";
     
     strcat(buffer, input);
-    buffer[strlen(buffer)-1] = 0;
+    // buffer[strlen(buffer)-1] = 0;
     strcat(buffer, secondHalf);
     
     cout << "from finished: "<< buffer << endl;
-    access_database(buffer);
+    //   access_database(buffer);
     
 }
 void esp(){
@@ -116,7 +116,7 @@ void esp(){
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
     cout << queryBuffer << endl;
-    access_database(queryBuffer);
+    //   access_database(queryBuffer);
     
 }
 
@@ -148,7 +148,7 @@ int main(){
                     newfd = acceptClient(listener);
                     cout << "new client on fd: "<< newfd << endl;
                     
-                    recv(newfd, &inputBuffer, 30, 0);
+                    recv(newfd, &inputBuffer, 10, 0);
                     
                     if(inputBuffer[0] == '1'){
                         android(inputBuffer);
@@ -187,4 +187,3 @@ int main(){
         }
     }
 }
-
