@@ -24,18 +24,25 @@ void mysql_connect (void){
 	}
 }
 
-
 void access_database(char* query){
 	mysql_connect();
 
-	mysql_query(mysql1, query);
-	res = mysql_use_result(mysql1);
-
-	printf("this is the data in you database\n");
-	while((row = mysql_fetch_row(res)) != NULL){
-		printf("%s \n", row[0]);
+	if (query[0] == 'I'){
+		printf("Going to android");
+		mysql_query(mysql1, query);
+		res = mysql_use_result(mysql1);
 	}
 
+	if (query[0] == 'S'){
+		printf("Going to esp");
+		mysql_query(mysql1, query);
+		res = mysql_use_result(mysql1);
+
+		printf("this is the data in you database\n");
+		while((row = mysql_fetch_row(res)) != NULL){
+			printf("%s \n", row[0]);
+		}
+	}
 	mysql_free_result(res);
 	mysql_close(mysql1);
 
