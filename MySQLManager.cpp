@@ -41,6 +41,7 @@ void access_database(char* query){
 		printf("this is the data in you database\n");
 		while((row = mysql_fetch_row(res)) != NULL){
 			printf("%s \n", row[1]);
+			printf("%s \n", row[3]);
 		}
 	}
 	mysql_free_result(res);
