@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <header.h>
+//#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -88,19 +88,44 @@ int acceptClient(int mainSocket){
     return newfd;
 };
 void android(char* input){
+    
     cout << "found android" << endl;
     cout << input << endl;
-    
     char buffer[60] ={0};
-    strcpy(buffer, "INSERT INTO subjects (menu_name) VALUE('");
-    char *secondHalf = "');";
     
-    strcat(buffer, input);
-    // buffer[strlen(buffer)-1] = 0;
-    strcat(buffer, secondHalf);
+    if (input[1] == '2'){
+        char *secondHalfO = "',1);";
+        getTime(input);
+        memmove(input+4, input + 11, 10);
+        memset(input + 9, '\0', 15);
+        strcpy(buffer, "INSERT INTO subjects (menu_name, visible) VALUE('");
+        
+        strcat(buffer, input);
+        strcat(buffer, secondHalfO);
+        
+    }
+    else if (input[1] == '3'){
+        char *secondHalfO = "',0);";
+        getTime(input);
+        memmove(input+4, input + 11, 10);
+        memset(input + 9, '\0', 15);
+        strcpy(buffer, "INSERT INTO subjects (menu_name, visible) VALUE('");
+        
+        strcat(buffer, input);
+        strcat(buffer, secondHalfO);
+        
+    }
+    else {
+        strcpy(buffer, "INSERT INTO subjects (menu_name, visible) VALUE('");
+        char *secondHalf = "',1);";
+        
+        input++;
+        strcat(buffer, input);
+        strcat(buffer, secondHalf);
+    }
     
     cout << "from finished: "<< buffer << endl;
-    access_database(buffer);
+    //    access_database(buffer);
     
 }
 void esp(){
@@ -111,12 +136,12 @@ void esp(){
     memmove(buffer+4, buffer + 11, 10);
     memset(buffer + 9, '\0', 15);
     char queryBuffer[54] = {0};
-    strcpy(queryBuffer, "SELECT * FROM subjects WHERE menu_name = '1");
+    strcpy(queryBuffer, "SELECT MAX(id) FROM subjects WHERE menu_name = '");
     char *secondHalf = "';";
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
     cout << queryBuffer << endl;
-    access_database(queryBuffer);
+    //    access_database(queryBuffer);
     
 }
 
@@ -150,7 +175,7 @@ int main(){
                     
                     recv(newfd, &inputBuffer, 10, 0);
                     
-                    if(inputBuffer[0] == '1'){
+                    if((inputBuffer[0] == '1') || (inputBuffer[0] == '2') || (inputBuffer[0] == '3')){
                         android(inputBuffer);
                     }
                     if (inputBuffer[0] == '0'){
@@ -187,3 +212,7 @@ int main(){
         }
     }
 }
+
+
+
+

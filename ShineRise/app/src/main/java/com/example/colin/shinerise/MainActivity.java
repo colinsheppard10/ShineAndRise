@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isOnline()) {
-                    requestData("10.0.0.6", finishedEditing());
+                    requestData("10.0.0.4", finishedEditing());
                 } else {
                     error.append("network connection failed");
                 }
@@ -65,13 +65,13 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     if (isOnline()) {
-                        requestData("10.0.0.4", "ONN OVERRIDE");
+                        requestData("10.0.0.4", "2N OVERID");
                     } else {
                         error.append("network connection failed");
                     }
                 }else{
                     if (isOnline()) {
-                        requestData("10.0.0.4", "OFF OVERRIDE");
+                        requestData("10.0.0.4", "3F OVERID");
                     } else {
                         error.append("network connection failed");
                     }
