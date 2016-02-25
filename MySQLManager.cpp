@@ -28,19 +28,19 @@ void access_database(char* query){
 	mysql_connect();
 
 	if (query[0] == 'I'){
-		printf("Going to android");
+		printf("Going to android\n");
 		mysql_query(mysql1, query);
 		res = mysql_use_result(mysql1);
 	}
 
 	if (query[0] == 'S'){
-		printf("Going to esp");
+		printf("Going to esp\n");
 		mysql_query(mysql1, query);
 		res = mysql_use_result(mysql1);
 
 		printf("this is the data in you database\n");
 		while((row = mysql_fetch_row(res)) != NULL){
-			printf("%s \n", row[0]);
+			printf("%s \n", row[1]);
 		}
 	}
 	mysql_free_result(res);
