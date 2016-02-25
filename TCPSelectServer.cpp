@@ -135,8 +135,8 @@ void esp(){
     cout << "found esp from TCP select" << endl;
     memmove(buffer+4, buffer + 11, 10);
     memset(buffer + 9, '\0', 15);
-    char queryBuffer[54] = {0};
-    strcpy(queryBuffer, "SELECT MAX(id) FROM subjects WHERE menu_name = '");
+    char queryBuffer[91] = {0};
+    strcpy(queryBuffer, "SELECT * FROM subjects WHERE id = (SELECT max(id) FROM subjects) or menu_name = '");
     char *secondHalf = "';";
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
