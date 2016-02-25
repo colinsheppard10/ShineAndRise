@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-//#include <header.h>
+#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -100,7 +100,7 @@ void android(char* input){
     strcat(buffer, secondHalf);
     
     cout << "from finished: "<< buffer << endl;
-    //   access_database(buffer);
+    access_database(buffer);
     
 }
 void esp(){
@@ -116,7 +116,7 @@ void esp(){
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
     cout << queryBuffer << endl;
-    //   access_database(queryBuffer);
+    access_database(queryBuffer);
     
 }
 
@@ -126,7 +126,7 @@ int main(){
     fd_set master;
     int listener;
     char timeBuffer[30];
-    char inputBuffer[99];
+    char inputBuffer[99] = {0};
     
     listener = setUpServer();
     
