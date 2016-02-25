@@ -104,7 +104,20 @@ void android(char* input){
     
 }
 void esp(){
+    char buffer[24];
+    getTime(buffer);
+    
     cout << "found esp" << endl;
+    memmove(buffer+4, buffer + 11, 10);
+    memset(buffer + 9, '\0', 15);
+    char queryBuffer[53] = {0};
+    strcpy(queryBuffer, "SELECT * FROM subjects WHERE menu_name = '");
+    char *secondHalf = "';";
+    strcat(queryBuffer, buffer);
+    strcat(queryBuffer, secondHalf);
+    cout << queryBuffer << endl;
+    access_database(queryBuffer);
+    
 }
 
 int main(){
@@ -114,9 +127,6 @@ int main(){
     int listener;
     char timeBuffer[30];
     char inputBuffer[99];
-    
-    getTime(timeBuffer);
-    cout << timeBuffer << endl;
     
     listener = setUpServer();
     

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isOnline()) {
-                    requestData("10.8.234.123", finishedEditing());
+                    requestData("10.0.0.4", finishedEditing());
                 } else {
                     error.append("network connection failed");
                 }
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     if (isOnline()) {
-                        requestData("10.0.0.4", "ON OVERRIDE");
+                        requestData("10.0.0.4", "ONN OVERRIDE");
                     } else {
                         error.append("network connection failed");
                     }
@@ -103,19 +103,19 @@ public class MainActivity extends AppCompatActivity {
         Sunday = (RadioButton) findViewById(R.id.radioButton7);
 
         if (Monday.isChecked())
-            return "Monday";
+            return "Mon";
         else if (Tuesday.isChecked())
-            return "Tuesday";
+            return "Tue";
         else if (Wednesday.isChecked())
-            return "Wednesday";
+            return "Wed";
         else if (Thursday.isChecked())
-            return "Thursday";
+            return "Thu";
         else if (Friday.isChecked())
-            return "Friday";
+            return "Fri";
         else if (Saturday.isChecked())
-            return "Saturday";
+            return "Sat";
         else if (Sunday.isChecked())
-            return "Sunday";
+            return "Sun";
         else
             return "No";
     }

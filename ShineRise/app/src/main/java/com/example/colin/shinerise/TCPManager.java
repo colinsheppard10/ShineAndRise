@@ -21,6 +21,7 @@ public class TCPManager {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             socket.close();
 
+
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
@@ -28,7 +29,7 @@ public class TCPManager {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        } finally {
+         } finally {
             if (reader != null) {
                 try {
                     reader.close();
