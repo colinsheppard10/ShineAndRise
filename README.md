@@ -1,10 +1,10 @@
 # ShineAndRise
 A networked light switch, giving a user control over their home's lighitng with an Android applicaiton. A user can also set "wake up alarms" and have their lights turn on at predetermined times.<br />
-ShineRise: Folder containing the Android application <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-The application forms a TCP connection on port 3490. The server's IP address is hard coded as my PI's IP address.  <br />
 Screen shot of ShineAndRise UI.
 ![Alt text](https://github.com/colinsheppard10/ShineAndRise/blob/master/Images/UserInterface.png "Optional title")
 
+ShineRise: Folder containing the Android application <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-The application forms a TCP connection on port 3490. The server's IP address is hard coded as my PI's IP address.  <br />
 TCPSelectServer: cpp code to impliment the server <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-To run the server without connecting to MySQL database comment out the "access_database()" function calls. <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-The server implements the Select() function to monitor multiple file descriptors without blocking.<br />
