@@ -1,4 +1,5 @@
 # ShineAndRise
+A networked light switch, giving a user control over their home's lighitng with an Android applicaiton <br />
 ShineRise: Folder containing the Android application <br />
 The application forms a TCP connection on port 3490. The server's IP address is hard coded as my PI's IP address.  <br />
 Screen shot of ShineAndRise UI.
