@@ -21,11 +21,12 @@
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Switch"
+        android:text="ON/OFF"
         android:id="@+id/switch1"
         android:layout_above="@+id/button"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/timePicker" />
+        android:layout_below="@+id/timePicker"
+        android:checked="false" />
 
     <TimePicker
         android:layout_width="wrap_content"
