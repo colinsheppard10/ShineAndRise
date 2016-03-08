@@ -1,5 +1,5 @@
 # ShineAndRise
-A networked light switch, giving a user control over their home's lighitng with an Android applicaiton <br />
+A networked light switch, giving a user control over their home's lighitng with an Android applicaiton. A user can also set "wake up alarms" and have their lights turn on at predetermined times.<br />
 ShineRise: Folder containing the Android application <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-The application forms a TCP connection on port 3490. The server's IP address is hard coded as my PI's IP address.  <br />
 Screen shot of ShineAndRise UI.
