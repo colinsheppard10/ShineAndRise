@@ -1,1 +1,1 @@
-void access_database(char*);
+void access_database(char*, char*);

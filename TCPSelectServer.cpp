@@ -125,7 +125,9 @@ void android(char* input){
     }
     
     cout << "from finished: "<< buffer << endl;
-    access_database(buffer);
+    
+	char dbBuffer[8];
+	access_database(buffer,dbBuffer);
     
 }
 void esp(){

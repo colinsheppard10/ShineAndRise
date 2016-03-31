@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include </usr/include/mysql/mysql.h>
 #include <header.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string.h>
 
 #define DATABASE_NAME "widget_corp"
 #define DATABASE_USERNAME "widget_cms"
@@ -43,9 +46,9 @@ void access_database(char* query, char* buffer){
 			printf("%s \n", row[1]);
 			printf("%s \n", row[3]);
 		}
+		memmove(buffer, row[1], 8);
 	}
-    memmove(buffer, row[1],8);
-    
+
 	mysql_free_result(res);
 	mysql_close(mysql1);
 
