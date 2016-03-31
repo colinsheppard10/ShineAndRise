@@ -24,7 +24,7 @@ void mysql_connect (void){
 	}
 }
 
-void access_database(char* query){
+void access_database(char* query, char* buffer){
 	mysql_connect();
 
 	if (query[0] == 'I'){
@@ -44,6 +44,8 @@ void access_database(char* query){
 			printf("%s \n", row[3]);
 		}
 	}
+    memmove(buffer, row[1],8);
+    
 	mysql_free_result(res);
 	mysql_close(mysql1);
 
