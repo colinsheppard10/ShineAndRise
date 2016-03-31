@@ -128,7 +128,8 @@ void android(char* input){
     
 	char dbBuffer[8];
 	access_database(buffer,dbBuffer);
-    
+	cout <<  dbBuffer << "needs to go to main" << endl;
+	    
 }
 void esp(){
     char buffer[24];
