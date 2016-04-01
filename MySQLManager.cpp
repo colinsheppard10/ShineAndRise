@@ -41,11 +41,11 @@ void access_database(char* query, char* buffer){
 		mysql_query(mysql1, query);
 		res = mysql_use_result(mysql1);
 
-		printf("this is the data in you database\n");
+		printf("this is the data in you database: ");
 		while((row = mysql_fetch_row(res)) != NULL){
-			printf("%s \n", row[1]);
+			printf("%s ,", row[1]);
 			printf("%s \n", row[3]);
-			memmove(buffer, row[1], 8);
+			memmove(buffer, row[1], 9);
 		}
 	}
 

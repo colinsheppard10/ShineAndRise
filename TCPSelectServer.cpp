@@ -134,7 +134,7 @@ void android(char* input){
 void esp(){
     char buffer[24];
     getTime(buffer);
-    char dbBuffer[8];
+    char dbBuffer[10] = {0};
     
     cout << "found esp from TCP select" << endl;
     memmove(buffer+4, buffer + 11, 10);
@@ -144,9 +144,9 @@ void esp(){
     char *secondHalf = "';";
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
-    cout << queryBuffer << endl;
+    cout <<"prepared query from esp(): " << queryBuffer << endl;
     access_database(queryBuffer, dbBuffer);// dbbuffer need to be from main and go to main(out to esp)
-    cout << dbBuffer << endl;
+    cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     
 }
 
