@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <header.h>
+//#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -126,15 +126,13 @@ void android(char* input){
     
     cout << "from finished: "<< buffer << endl;
     
-	char dbBuffer[8];
-	access_database(buffer,dbBuffer);
-	cout <<  dbBuffer << "needs to go to main" << endl;
-	    
+    char dbBuffer[10] = {0};
+    //   access_database(buffer,dbBuffer);
 }
-void esp(){
+void esp(char* dbBuffer){
     char buffer[24];
     getTime(buffer);
-    char dbBuffer[10] = {0};
+    //char dbBuffer[10] = {0};
     
     cout << "found esp from TCP select" << endl;
     memmove(buffer+4, buffer + 11, 10);
@@ -145,7 +143,8 @@ void esp(){
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
     cout <<"prepared query from esp(): " << queryBuffer << endl;
-    access_database(queryBuffer, dbBuffer);// dbbuffer need to be from main and go to main(out to esp)
+    // access_database(queryBuffer, dbBuffer);// dbbuffer need to be from main and go to main(out to esp)
+    memmove(dbBuffer, "fromesppp", 9);
     cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     
 }
@@ -157,6 +156,7 @@ int main(){
     int listener;
     char timeBuffer[30];
     char inputBuffer[99] = {0};
+    char espBuffer[10] = {0};
     
     listener = setUpServer();
     
@@ -184,7 +184,8 @@ int main(){
                         android(inputBuffer);
                     }
                     if (inputBuffer[0] == '0'){
-                        esp();
+                        esp(espBuffer);
+                        send(newfd, espBuffer, 8, 0);
                     }
                     
                     FD_SET(newfd, &master);
@@ -204,13 +205,6 @@ int main(){
                         }
                         close(i); // bye!
                         FD_CLR(i, &master); // remove from master set
-                    }else{
-                        int z;
-                        for(z = 0; z <= numberfd; z++){
-                            if (z != listener && z != i){
-                                send(z, inputBuffer, nbytes, 0);
-                            }
-                        }
                     }
                 }
             }
