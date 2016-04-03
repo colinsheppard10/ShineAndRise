@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <header.h>
+//#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -213,19 +213,31 @@ void android(char* input){
     }
     
     cout << "from android finished: "<< buffer << endl;
-    access_database(buffer,dbBuffer);
+    //    access_database(buffer,dbBuffer);
     
 }
 void esp(char* dbBuffer){
-    char buffer[24];
+    char buffer[24] = {0};
     getTime(buffer);
-    
+    char digit;
     cout << "found esp from TCP select" << endl;
     memmove(buffer+4, buffer + 11, 10);
     memset(buffer + 9, '\0', 15);
     char queryBuffer[91] = {0};
-    strcpy(queryBuffer, "SELECT * FROM subjects WHERE id = (SELECT max(id) FROM subjects) or menu_name = '");
-    char *secondHalf = "';";
+    
+    getTime(buffer);
+    digit = getDigit(buffer);
+    memset(buffer, digit, 1);
+    memmove(buffer + 1, buffer + 11, 2);
+    memmove(buffer + 3, buffer + 14, 2);
+    memmove(buffer + 5, buffer + 17, 2);
+    memmove(buffer + 7, "\0", 1);
+    
+    
+    
+    strcpy(queryBuffer, "SELECT min(menu_name) FROM subjects WHERE menue_name > ");
+    char *secondHalf = ";";
+    
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
     cout <<"prepared query from esp(): " << queryBuffer << endl;
