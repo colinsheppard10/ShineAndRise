@@ -87,32 +87,111 @@ int acceptClient(int mainSocket){
     
     return newfd;
 };
+
+class node{
+public: string weekDay;
+    int value;
+    node* nextNode;
+    
+public: node(string enteredWeekday){
+    weekDay = enteredWeekday;
+};
+};
+void makeCircleWeek(char* alarmTime){
+    
+    char currentDay[20] = {0};
+    getTime(currentDay);
+    
+    node Monday = node("Mon");
+    node Tuesday = node("Tue");
+    node Wedneday = node("Wed");
+    node Thursday = node("Thu");
+    node Friday = node("Fri");
+    node Saturday = node("Sat");
+    node Sunday = node("Sun");
+    
+    Monday.nextNode = &Tuesday;
+    Tuesday.nextNode = &Wedneday;
+    Wedneday.nextNode = &Thursday;
+    Thursday.nextNode = &Friday;
+    Friday.nextNode = &Saturday;
+    Saturday.nextNode = &Sunday;
+    Sunday.nextNode = &Monday;
+    
+    node* finderNode;
+    finderNode = &Monday;
+    while ((finderNode->weekDay[0] != currentDay[0]) || (finderNode->weekDay[1] != currentDay[1]) || (finderNode->weekDay[2] != currentDay[2])){
+        finderNode = finderNode->nextNode;
+    }
+    
+    cout << "found node:" << finderNode->weekDay << endl;
+    
+    for (int i = 0; i <= 6; i++){
+        finderNode->value = i;
+        finderNode = finderNode->nextNode;
+    }
+    
+    for (int i = 0; i <= 6; i++){
+        cout << finderNode->weekDay << ":" << finderNode->value << endl;
+        finderNode = finderNode->nextNode;
+    }
+    
+}
+char getDigit(char* input){
+    if((input[0] == 'M') && (input[1] == 'o') && (input[2] == 'n'))
+        return '1';
+    if((input[0] == 'T') && (input[1] == 'u') && (input[2] == 'e'))
+        return '2';
+    if((input[0] == 'W') && (input[1] == 'e') && (input[2] == 'd'))
+        return '3';
+    if((input[0] == 'T') && (input[1] == 'h') && (input[2] == 'u'))
+        return '4';
+    if((input[0] == 'F') && (input[1] == 'r') && (input[2] == 'i'))
+        return '5';
+    if((input[0] == 'S') && (input[1] == 'a') && (input[2] == 't'))
+        return '6';
+    if((input[0] == 'S') && (input[1] == 'u') && (input[2] == 'n'))
+        return '7';
+    else
+        return '0';
+}
+
 void android(char* input){
     
     cout << "found android" << endl;
     cout << input << endl;
-    char buffer[60] ={0};
+    char buffer[62] ={0};
+    char dbBuffer[10] = {0};
+    char digit;
     
     if (input[1] == '2'){
         char *secondHalfO = "',1);";
         getTime(input);
-        memmove(input+4, input + 11, 10);
-        memset(input + 9, '\0', 15);
+        digit = getDigit(input);
+        memset(input, digit, 1);
+        memmove(input + 1, input + 11, 2);
+        memmove(input + 3, input + 14, 2);
+        memmove(input + 5, input + 17, 2);
+        
         strcpy(buffer, "INSERT INTO subjects (menu_name, visible) VALUE('");
         
-        strcat(buffer, input);
-        strcat(buffer, secondHalfO);
-        
+        memmove(buffer+49, input, 7);
+        memmove(buffer+56, secondHalfO, 5);
     }
     else if (input[1] == '3'){
         char *secondHalfO = "',2);";
         getTime(input);
-        memmove(input+4, input + 11, 10);
-        memset(input + 9, '\0', 15);
+        digit = getDigit(input);
+        memset(input, digit, 1);
+        memmove(input + 1, input + 11, 2);
+        memmove(input + 3, input + 14, 2);
+        memmove(input + 5, input + 17, 2);
+        
         strcpy(buffer, "INSERT INTO subjects (menu_name, visible) VALUE('");
         
-        strcat(buffer, input);
-        strcat(buffer, secondHalfO);
+        memmove(buffer+49, input, 7);
+        memmove(buffer+56, secondHalfO, 5);
+        
         
     }
     else {
@@ -120,14 +199,20 @@ void android(char* input){
         char *secondHalf = "',0);";
         
         input++;
-        strcat(buffer, input);
+        
+        digit = getDigit(input);
+        cout << digit << endl;
+        
+        strcat(buffer, &digit);
+        memmove(&buffer[50], input+4, 2);
+        strcat(buffer, input + 7);
         strcat(buffer, secondHalf);
+        
     }
     
-    cout << "from finished: "<< buffer << endl;
-    
-    char dbBuffer[10] = {0};
+    cout << "from android finished: "<< buffer << endl;
     access_database(buffer,dbBuffer);
+    
 }
 void esp(char* dbBuffer){
     char buffer[24];
@@ -178,7 +263,7 @@ int main(){
                     
                     recv(newfd, &inputBuffer, 10, 0);
                     
-                    if((inputBuffer[0] == '1') || (inputBuffer[0] == '2') || (inputBuffer[0] == '3')){
+                    if(inputBuffer[0] == '1'){
                         android(inputBuffer);
                     }
                     if (inputBuffer[0] == '0'){
