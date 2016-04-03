@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-//#include <header.h>
+#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -213,7 +213,7 @@ void android(char* input){
     }
     
     cout << "from android finished: "<< buffer << endl;
-    //    access_database(buffer,dbBuffer);
+    access_database(buffer,dbBuffer);
     
 }
 void esp(char* dbBuffer){
@@ -235,7 +235,7 @@ void esp(char* dbBuffer){
     
     
     
-    strcpy(queryBuffer, "SELECT min(menu_name) FROM subjects WHERE menue_name > ");
+    strcpy(queryBuffer, "SELECT min(menu_name) FROM subjects WHERE menu_name > ");
     char *secondHalf = ";";
     
     strcat(queryBuffer, buffer);
