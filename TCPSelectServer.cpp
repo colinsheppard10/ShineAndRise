@@ -105,7 +105,7 @@ void android(char* input){
         
     }
     else if (input[1] == '3'){
-        char *secondHalfO = "',0);";
+        char *secondHalfO = "',2);";
         getTime(input);
         memmove(input+4, input + 11, 10);
         memset(input + 9, '\0', 15);
@@ -117,7 +117,7 @@ void android(char* input){
     }
     else {
         strcpy(buffer, "INSERT INTO subjects (menu_name, visible) VALUE('");
-        char *secondHalf = "',1);";
+        char *secondHalf = "',0);";
         
         input++;
         strcat(buffer, input);
@@ -132,7 +132,6 @@ void android(char* input){
 void esp(char* dbBuffer){
     char buffer[24];
     getTime(buffer);
-    //char dbBuffer[10] = {0};
     
     cout << "found esp from TCP select" << endl;
     memmove(buffer+4, buffer + 11, 10);
@@ -143,8 +142,7 @@ void esp(char* dbBuffer){
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
     cout <<"prepared query from esp(): " << queryBuffer << endl;
-    access_database(queryBuffer, dbBuffer);// dbbuffer need to be from main and go to main(out to esp)
-   // memmove(dbBuffer, "fromesppp", 9);
+    access_database(queryBuffer, dbBuffer);
     cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     
 }
@@ -185,6 +183,7 @@ int main(){
                     }
                     if (inputBuffer[0] == '0'){
                         esp(espBuffer);
+                        // this is where I am sending the string to the ESP
                         send(newfd, espBuffer, 8, 0);
                     }
                     
