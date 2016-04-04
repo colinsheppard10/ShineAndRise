@@ -184,8 +184,8 @@ void esp(char* dbBuffer){
     memmove(buffer + 5, buffer + 17, 2);
     memmove(buffer + 7, "\0", 1);
     
-    strcpy(queryBuffer, "SELECT * FROM subjects WHERE menu_name = (SELECT MIN(menu_name) from subjects where menu_name > ");
-    char *secondHalf = ";";
+    strcpy(queryBuffer, "SELECT * FROM subjects WHERE menu_name = (SELECT MIN(menu_name) from subjects where menu_name > (");
+    char *secondHalf = " - 3);";
     
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
