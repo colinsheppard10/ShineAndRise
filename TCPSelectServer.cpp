@@ -88,55 +88,6 @@ int acceptClient(int mainSocket){
     return newfd;
 };
 
-class node{
-public: string weekDay;
-    int value;
-    node* nextNode;
-    
-public: node(string enteredWeekday){
-    weekDay = enteredWeekday;
-};
-};
-void makeCircleWeek(char* alarmTime){
-    
-    char currentDay[20] = {0};
-    getTime(currentDay);
-    
-    node Monday = node("Mon");
-    node Tuesday = node("Tue");
-    node Wedneday = node("Wed");
-    node Thursday = node("Thu");
-    node Friday = node("Fri");
-    node Saturday = node("Sat");
-    node Sunday = node("Sun");
-    
-    Monday.nextNode = &Tuesday;
-    Tuesday.nextNode = &Wedneday;
-    Wedneday.nextNode = &Thursday;
-    Thursday.nextNode = &Friday;
-    Friday.nextNode = &Saturday;
-    Saturday.nextNode = &Sunday;
-    Sunday.nextNode = &Monday;
-    
-    node* finderNode;
-    finderNode = &Monday;
-    while ((finderNode->weekDay[0] != currentDay[0]) || (finderNode->weekDay[1] != currentDay[1]) || (finderNode->weekDay[2] != currentDay[2])){
-        finderNode = finderNode->nextNode;
-    }
-    
-    cout << "found node:" << finderNode->weekDay << endl;
-    
-    for (int i = 0; i <= 6; i++){
-        finderNode->value = i;
-        finderNode = finderNode->nextNode;
-    }
-    
-    for (int i = 0; i <= 6; i++){
-        cout << finderNode->weekDay << ":" << finderNode->value << endl;
-        finderNode = finderNode->nextNode;
-    }
-    
-}
 char getDigit(char* input){
     if((input[0] == 'M') && (input[1] == 'o') && (input[2] == 'n'))
         return '1';
