@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-//#include <header.h>
+#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -164,7 +164,7 @@ void android(char* input){
     }
     
     cout << "from android finished: "<< buffer << endl;
-    //    access_database(buffer,dbBuffer);
+    access_database(buffer,dbBuffer);
     
 }
 
@@ -210,7 +210,6 @@ void esp(char* dbBuffer){
     strcat(queryBuffer, secondHalf);
     cout <<"prepared query from esp(): " << queryBuffer << endl;
     access_database(queryBuffer, dbBuffer);
-    //    memmove(dbBuffer, "020202", 6);
     cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     strcat(responseTime, dbBuffer);
     memmove(dbBuffer, responseTime, 20);
