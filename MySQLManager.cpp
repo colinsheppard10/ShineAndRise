@@ -47,7 +47,9 @@ void access_database(char* query, char* buffer){
 		while((row = mysql_fetch_row(res)) != NULL){
 			printf("%s ,", row[1]);
 			printf("%s \n", row[3]);
-			memmove(buffer, row[1], 7);
+			memmove(buffer, row[1] + 1, 4);
+            memmove(buffer+ 4, "1", 1);
+            memmove(buffer+ 5, row[3], 1);
 		}
 	}
 

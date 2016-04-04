@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <header.h>
+//#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -164,19 +164,38 @@ void android(char* input){
     }
     
     cout << "from android finished: "<< buffer << endl;
-    access_database(buffer,dbBuffer);
+    //    access_database(buffer,dbBuffer);
     
 }
-void esp(char* dbBuffer){
-    char buffer[24] = {0};
-    getTime(buffer);
-    char digit;
-    cout << "found esp from TCP select" << endl;
-    memmove(buffer+4, buffer + 11, 10);
-    memset(buffer + 9, '\0', 15);
-    char queryBuffer[150] = {0};
+
+char getMonthDigit(char* time){
     
+    if (time[4] == 'A')
+        return '4';
+    return '5';
+}
+void esp(char* dbBuffer){
+    cout << "found esp from TCP select" << endl;
+    
+    char buffer[24] = {0};
+    char digit;
+    char queryBuffer[150] = {0};
+    char responseTime[20] = {0};
     getTime(buffer);
+    
+    memmove(responseTime, buffer + 11, 2);
+    memmove(responseTime + 2, buffer + 14, 2);
+    memmove(responseTime + 4, buffer + 17, 2);
+    memmove(responseTime + 6, buffer + 8, 2);
+    if (responseTime[6] == ' '){
+        responseTime[6] = '0';
+    }
+    memset(responseTime + 8, '0', 1);
+    memset(responseTime + 9, getMonthDigit(buffer), 1);
+    memmove(responseTime + 10, buffer + 20, 4);
+    cout << responseTime << endl;
+    
+    
     digit = getDigit(buffer);
     memset(buffer, digit, 1);
     memmove(buffer + 1, buffer + 11, 2);
@@ -191,7 +210,11 @@ void esp(char* dbBuffer){
     strcat(queryBuffer, secondHalf);
     cout <<"prepared query from esp(): " << queryBuffer << endl;
     access_database(queryBuffer, dbBuffer);
+    //    memmove(dbBuffer, "020202", 6);
     cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
+    strcat(responseTime, dbBuffer);
+    memmove(dbBuffer, responseTime, 20);
+    
     
 }
 
@@ -202,7 +225,7 @@ int main(){
     int listener;
     char timeBuffer[30];
     char inputBuffer[99] = {0};
-    char espBuffer[10] = {0};
+    char espBuffer[20] = {0};
     
     listener = setUpServer();
     
