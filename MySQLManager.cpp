@@ -39,8 +39,8 @@ void access_database(char* query, char* buffer){
 	if (query[0] == 'S'){
 		printf("Going to esp\n");
 		printf("From MY: %s \n", query);
-		mysql_query(mysql1,"SELECT * FROM subjects WHERE menu_name = (SELECT MIN(menu_name) from subjects where menu_name > 7175200);");
-	//	mysql_query(mysql1, query);
+	//	mysql_query(mysql1,"SELECT * FROM subjects WHERE menu_name = (SELECT MIN(menu_name) from subjects where menu_name > 7175200);");
+		mysql_query(mysql1, query);
 		res = mysql_use_result(mysql1);
 
 		printf("this is the data in you database: ");
