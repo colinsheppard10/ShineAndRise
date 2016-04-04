@@ -253,7 +253,7 @@ int main(){
                     if (inputBuffer[0] == '0'){
                         esp(espBuffer);
                         // this is where I am sending the string to the ESP
-                        send(newfd, espBuffer, 8, 0);
+                        send(newfd, espBuffer, 20, 0);
                     }
                     
                     FD_SET(newfd, &master);
