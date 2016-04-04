@@ -210,10 +210,9 @@ void esp(char* dbBuffer){
     strcat(queryBuffer, secondHalf);
     cout <<"prepared query from esp(): " << queryBuffer << endl;
     access_database(queryBuffer, dbBuffer);
-    cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     strcat(responseTime, dbBuffer);
     memmove(dbBuffer, responseTime, 20);
-    
+	cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     
 }
 
