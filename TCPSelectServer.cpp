@@ -212,7 +212,7 @@ void esp(char* dbBuffer){
     access_database(queryBuffer, dbBuffer);
     strcat(responseTime, dbBuffer);
     memmove(dbBuffer, responseTime, 20);
-	cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
+    cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     
 }
 
