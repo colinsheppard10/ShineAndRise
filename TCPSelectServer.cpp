@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <header.h>
+//#include <header.h>
 
 using std::cout;
 using std::endl;
@@ -164,7 +164,7 @@ void android(char* input){
     }
     
     cout << "from android finished: "<< buffer << endl;
-    access_database(buffer,dbBuffer);
+    //    access_database(buffer,dbBuffer);
     
 }
 
@@ -209,9 +209,11 @@ void esp(char* dbBuffer){
     strcat(queryBuffer, buffer);
     strcat(queryBuffer, secondHalf);
     cout <<"prepared query from esp(): " << queryBuffer << endl;
-    access_database(queryBuffer, dbBuffer);
+    //   access_database(queryBuffer, dbBuffer);
+    memmove(dbBuffer, "020201", 6);
     strcat(responseTime, dbBuffer);
     memmove(dbBuffer, responseTime, 20);
+    memmove(dbBuffer +20, "\0", 1);
     cout <<"dbBuffer from esp(): " << dbBuffer << endl << endl;
     
 }
@@ -223,7 +225,7 @@ int main(){
     int listener;
     char timeBuffer[30];
     char inputBuffer[99] = {0};
-    char espBuffer[20] = {0};
+    char espBuffer[21] = {0};
     
     listener = setUpServer();
     
@@ -253,7 +255,7 @@ int main(){
                     if (inputBuffer[0] == '0'){
                         esp(espBuffer);
                         // this is where I am sending the string to the ESP
-                        send(newfd, espBuffer, 20, 0);
+                        send(newfd, espBuffer, 21, 0);
                     }
                     
                     FD_SET(newfd, &master);
