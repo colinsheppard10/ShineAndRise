@@ -32,6 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void startComp(View view) {
         vibrator.cancel();
-        BootReceiver.completedComp();
+        AlarmReciever.setFlag();
     }
 }
